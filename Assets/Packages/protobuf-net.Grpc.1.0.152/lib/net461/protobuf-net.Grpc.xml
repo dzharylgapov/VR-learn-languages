@@ -1,0 +1,841 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>protobuf-net.Grpc</name>
+    </assembly>
+    <members>
+        <member name="T:ProtoBuf.Grpc.CallContext">
+            <summary>
+            Unifies the API for client and server gRPC call contexts; the API intersection is available
+            directly - for client-specific or server-specific options: use .Client or .Server; note that
+            whether this is a client or server context depends on the usage. Silent conversions are available.
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.Equals(System.Object)">
+            <summary>Evaluates equality between <see cref="T:ProtoBuf.Grpc.CallContext"/> values as defined by their <see cref="P:ProtoBuf.Grpc.CallContext.CallOptions"/>.</summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.GetHashCode">
+            <summary>Evaluates a hashcodeas defined by the <see cref="P:ProtoBuf.Grpc.CallContext.CallOptions"/> of the instance.</summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="F:ProtoBuf.Grpc.CallContext.Default">
+            <summary>
+            Default context; all default client options; no server context
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.CallContext.CallOptions">
+            <summary>
+            The options defined on the context; this will be valid for both server and client operations
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.CallContext.ServerCallContext">
+            <summary>
+            The server call-context; this will only be valid for server operations
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.CallContext.RequestHeaders">
+            <summary>
+            The request headers associated with the operation; this will be valid for both server and client operations
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.CallContext.CancellationToken">
+            <summary>
+            The cancellation token associated with the operation; this will be valid for both server and client operations
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.CallContext.Deadline">
+            <summary>
+            The deadline associated with the operation; this will be valid for both server and client operations
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.CallContext.WriteOptions">
+            <summary>
+            The write options associated with the operation; this will be valid for both server and client operations
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.#ctor(System.Object,Grpc.Core.ServerCallContext)">
+            <summary>
+            Creates a call-context that represents a server operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.As``1">
+            <summary>
+            Gets the typed state object that was supplied to this context
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.CallContext.State">
+            <summary>
+            Gets the state object that was supplied to this context
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.#ctor(Grpc.Core.CallOptions@,ProtoBuf.Grpc.CallContextFlags,System.Object)">
+            <summary>
+            Creates a call-context that represents a client operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.op_Implicit(Grpc.Core.CallOptions@)~ProtoBuf.Grpc.CallContext">
+            <summary>
+            Creates a call-context that represents a client operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.op_Implicit(System.Threading.CancellationToken)~ProtoBuf.Grpc.CallContext">
+            <summary>
+            Creates a call-context that represents a client operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.ResponseHeaders">
+            <summary>
+            Get the response-headers from a client operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.ResponseHeadersAsync">
+            <summary>
+            Get the response-headers from a client operation when they are available
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.ResponseTrailers">
+            <summary>
+            Get the response-trailers from a client operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.ResponseStatus">
+            <summary>
+            Get the response-status from a client operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.FullDuplexAsync``2(System.Func{ProtoBuf.Grpc.CallContext,System.Collections.Generic.IAsyncEnumerable{``1}},System.Collections.Generic.IAsyncEnumerable{``0},System.Func{System.Collections.Generic.IAsyncEnumerable{``0},ProtoBuf.Grpc.CallContext,System.Threading.Tasks.ValueTask})">
+            <summary>
+            Performs a full-duplex operation that will await both the producer and consumer streams
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.FullDuplexAsync``2(System.Func{ProtoBuf.Grpc.CallContext,System.Collections.Generic.IAsyncEnumerable{``1}},System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,ProtoBuf.Grpc.CallContext,System.Threading.Tasks.ValueTask})">
+            <summary>
+            Performs a full-duplex operation that will await both the producer and consumer streams,
+            performing a given opreation on each element from the input stream
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.FullDuplexAsync``1(System.Func{ProtoBuf.Grpc.CallContext,System.Threading.Tasks.ValueTask},System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,ProtoBuf.Grpc.CallContext,System.Threading.Tasks.ValueTask})">
+            <summary>
+            Performs a full-duplex operation that will await the producer,
+            performing a given opreation on each element from the input stream
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.FullDuplexAsync``1(System.Func{ProtoBuf.Grpc.CallContext,System.Threading.Tasks.ValueTask},System.Collections.Generic.IAsyncEnumerable{``0},System.Func{System.Collections.Generic.IAsyncEnumerable{``0},ProtoBuf.Grpc.CallContext,System.Threading.Tasks.ValueTask})">
+            <summary>
+            Performs a full-duplex operation that will await the producer and consumer stream
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.ConsumeAsync``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``0,ProtoBuf.Grpc.CallContext,System.Threading.Tasks.ValueTask})">
+            <summary>
+            Performs an operation against each element in the inbound stream
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.CallContext.AggregateAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Func{``1,``0,ProtoBuf.Grpc.CallContext,System.Threading.Tasks.ValueTask{``1}},``1)">
+            <summary>
+            Performs an aggregate operation against each element in the inbound stream
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.CallContextFlags">
+            <summary>
+            Controls the behavior of client-based operations
+            </summary>
+        </member>
+        <member name="F:ProtoBuf.Grpc.CallContextFlags.None">
+            <summary>
+            Default options
+            </summary>
+        </member>
+        <member name="F:ProtoBuf.Grpc.CallContextFlags.CaptureMetadata">
+            <summary>
+            Response metadata (headers, trailers, status) will be captured and made available on the context
+            </summary>
+        </member>
+        <member name="F:ProtoBuf.Grpc.CallContextFlags.IgnoreStreamTermination">
+            <summary>
+            Suppresses the exception when a streaming message cannot be sent because the other end terminates the connection
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.ChannelAsyncEnumerableExtensions">
+            <summary>
+            Provides utility methods for working with asynchronous sequence and channels
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.ChannelAsyncEnumerableExtensions.AsAsyncEnumerable``1(System.Threading.Channels.Channel{``0},System.Threading.CancellationToken)">
+            <summary>
+            Consumes a channel as an asynchronous sequence
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.ChannelAsyncEnumerableExtensions.AsAsyncEnumerable``1(System.Threading.Channels.Channel{``0},System.Boolean,System.Threading.CancellationToken)">
+            <summary>
+            Consumes a channel as an asynchronous sequence
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.ChannelAsyncEnumerableExtensions.AsAsyncEnumerable``1(System.Threading.Channels.ChannelReader{``0},System.Threading.CancellationToken)">
+            <summary>
+            Consumes a channel as an asynchronous sequence
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.ChannelAsyncEnumerableExtensions.AsChannelReader``1(System.Collections.Generic.IAsyncEnumerable{``0},System.Threading.Channels.ChannelOptions,System.Threading.CancellationToken)">
+            <summary>
+            Consumes an asynchronous sequence as a channel
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Client.GrpcClient">
+            <summary>
+            A general purpose client for calling arbitrary gRPC methods without
+            any prior contract knowledge or runtime proxy generation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.ToString">
+            <summary>
+            Returns the service name of this client
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.#ctor(Grpc.Core.ChannelBase,System.String,ProtoBuf.Grpc.Configuration.BinderConfiguration,System.String)">
+            <summary>
+            Create a new client instance for the specified service
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.#ctor(Grpc.Core.CallInvoker,System.String,ProtoBuf.Grpc.Configuration.BinderConfiguration,System.String)">
+            <summary>
+            Create a new client instance for the specified service
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.#ctor(Grpc.Core.ChannelBase,System.Type,ProtoBuf.Grpc.Configuration.BinderConfiguration,System.String)">
+            <summary>
+            Create a new client instance for the specified service, inferring the service name from the type
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.#ctor(Grpc.Core.CallInvoker,System.Type,ProtoBuf.Grpc.Configuration.BinderConfiguration,System.String)">
+            <summary>
+            Create a new client instance for the specified service, inferring the service name from the type
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.UnaryAsync``2(``0,System.String,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.BlockingUnary``2(``0,System.String,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.ClientStreamingAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.String,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.ServerStreamingAsync``2(``0,System.String,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.DuplexStreamingAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.String,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.UnaryAsync``2(``0,System.Reflection.MethodInfo,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method, inferring the operation name from the method
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.BlockingUnary``2(``0,System.Reflection.MethodInfo,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method, inferring the operation name from the method
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.ClientStreamingAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Reflection.MethodInfo,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method, inferring the operation name from the method
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.ServerStreamingAsync``2(``0,System.Reflection.MethodInfo,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method, inferring the operation name from the method
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClient.DuplexStreamingAsync``2(System.Collections.Generic.IAsyncEnumerable{``0},System.Reflection.MethodInfo,ProtoBuf.Grpc.CallContext@)">
+            <summary>
+            Invoke the specified gRPC method, inferring the operation name from the method
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Client.GrpcClientFactory">
+            <summary>
+            Provides extension methods to the native Channel API
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Client.GrpcClientFactory.AllowUnencryptedHttp2">
+            <summary>
+            Allows HttpClient to use HTTP/2 without TLS
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClientFactory.CreateGrpcService``1(Grpc.Core.ChannelBase,ProtoBuf.Grpc.Configuration.ClientFactory)">
+            <summary>
+            Creates a code-first service backed by a ChannelBase instance
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClientFactory.CreateGrpcService``1(Grpc.Core.CallInvoker,ProtoBuf.Grpc.Configuration.ClientFactory)">
+            <summary>
+            Creates a code-first service backed by a ChannelBase instance
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClientFactory.CreateGrpcService(Grpc.Core.ChannelBase,System.Type,ProtoBuf.Grpc.Configuration.ClientFactory)">
+            <summary>
+            Creates a general purpose service backed by a ChannelBase instance
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Client.GrpcClientFactory.CreateGrpcService(Grpc.Core.CallInvoker,System.Type,ProtoBuf.Grpc.Configuration.ClientFactory)">
+            <summary>
+            Creates a general purpose service backed by a ChannelBase instance
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.BinderConfiguration">
+            <summary>
+            Describes rules for binding to gRPC services
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.BinderConfiguration.Default">
+            <summary>
+            Use the default MarshallerFactory and ServiceBinder
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.BinderConfiguration.Create(System.Collections.Generic.IList{ProtoBuf.Grpc.Configuration.MarshallerFactory},ProtoBuf.Grpc.Configuration.ServiceBinder)">
+            <summary>
+            Create a new binding configuration
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.BinderConfiguration.GetMarshaller``1">
+            <summary>
+            Gets a typed marshaller associated with this configuration
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.BinderConfiguration.SetMarshaller``1(Grpc.Core.Marshaller{``0})">
+            <summary>
+            Sets (or resets) a typed marshalled against this configuration
+            </summary>
+            <param name="marshaller">The marshaller to use - if null, the cache is reset for this type</param>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ClientFactory">
+            <summary>
+            Provides services for creating service clients (proxies)
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ClientFactory.Default">
+            <summary>
+            The default client factory (uses the default BinderConfiguration)
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ClientFactory.Create(ProtoBuf.Grpc.Configuration.BinderConfiguration)">
+            <summary>
+            Create a new client factory; note that non-default factories should be considered expensive, and stored/re-used suitably
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ClientFactory.BinderConfiguration">
+            <summary>
+            Get the binder configuration associated with this instance
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ClientFactory.op_Implicit(ProtoBuf.Grpc.Configuration.ClientFactory)~ProtoBuf.Grpc.Configuration.BinderConfiguration">
+            <summary>
+            Get the binder configuration associated with this instance
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ClientFactory.CreateClient``1(Grpc.Core.CallInvoker)">
+            <summary>
+            Create a service-client backed by a CallInvoker
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ClientFactory.CreateClient(Grpc.Core.CallInvoker,System.Type)">
+            <summary>
+            Create a service-client backed by a CallInvoker
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.IGrpcService">
+            <summary>
+            Marker interface for describing simple gRPC services.
+            When a type implements this interface, the type name (without any prefix or other qualification)
+            will be used as the name for resolving the gRPC service. All public methods defined by the type will be mapped as gRPC methods,
+            using their declared name. 
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.MarshallerFactory">
+            <summary>
+            Provides per-type serialization services
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.MarshallerFactory.#ctor">
+            <summary>
+            Create a new instance
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.MarshallerFactory.Deserialize``1(System.Byte[])">
+            <summary>
+            Deserializes an object from a payload
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.MarshallerFactory.Serialize``1(``0)">
+            <summary>
+            Serializes an object to a payload
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.MarshallerFactory.CreateMarshaller``1">
+            <summary>
+            Create a typed marshaller (this value is cached and reused automatically)
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.MarshallerFactory.CanSerialize(System.Type)">
+            <summary>
+            Indicates whether a type should be considered as a serializable data type
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.OperationAttribute">
+            <summary>
+            Explicitly indicates that a metho represents a gRPC method
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.OperationAttribute.Name">
+            <summary>
+            The name of the operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.OperationAttribute.#ctor(System.String)">
+            <summary>
+            Create a new instance of the attribute
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory">
+            <summary>
+            Provides protobuf-net implementation of a per-type marshaller
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Options">
+            <summary>
+            Options that control protobuf-net marshalling
+            </summary>
+        </member>
+        <member name="F:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Options.None">
+            <summary>
+            No options
+            </summary>
+        </member>
+        <member name="F:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Options.ContractTypesOnly">
+            <summary>
+            Enforce that only contract-types should be allowed
+            </summary>
+        </member>
+        <member name="F:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Options.DisableContextualSerializer">
+            <summary>
+            Disable 'contextual' serializer usage (this means serializers that use <see cref="T:System.Buffers.ReadOnlySequence`1"/> or <see cref="T:System.Buffers.IBufferWriter`1"/>),
+            using the legacy <see cref="T:byte[]" /> APIs.
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Default">
+            <summary>
+            Uses the default protobuf-net serializer
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Model">
+            <summary>
+            Gets the model used by this instance.
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Create(ProtoBuf.Meta.TypeModel,ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Options,System.Object)">
+            <summary>
+            Create a new factory using a specific protobuf-net model
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Create(ProtoBuf.Meta.RuntimeTypeModel,ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Options)">
+            <summary>
+            Create a new factory using a specific protobuf-net model
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.CreateMarshaller``1">
+            <summary>
+            Deserializes an object from a payload
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.CanSerialize(System.Type)">
+            <summary>
+            Indicates whether a type should be considered as a serializable data type
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Deserialize``1(System.Byte[])">
+            <summary>
+            Deserializes an object from a payload
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ProtoBufMarshallerFactory.Serialize``1(``0)">
+            <summary>
+            Serializes an object to a payload
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ProxyAttribute">
+            <summary>
+            Specifies a pre-generated proxy that provides an implementation of this service
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ProxyAttribute.Type">
+            <summary>
+            Indicates the proxy type
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ProxyAttribute.#ctor(System.Type)">
+            <summary>
+            Create a new ProxyAttribute instance
+            </summary>
+            <param name="type">Indicates the proxy type</param>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ServerBinder">
+            <summary>
+            Helper API for binding servers; this is an advanced API that would only be used if you are implementing a new transport provider
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerBinder.Bind``1(System.Object,ProtoBuf.Grpc.Configuration.BinderConfiguration,``0)">
+            <summary>
+            Initiate a bind operation, causing all service methods to be crawled for the provided type
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerBinder.Bind(System.Object,System.Type,ProtoBuf.Grpc.Configuration.BinderConfiguration,System.Object)">
+            <summary>
+            Initiate a bind operation, causing all service methods to be crawled for the provided type
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerBinder.OnServiceBound(System.Object,System.String,System.Type,System.Type,System.Int32)">
+            <summary>
+            Reports the number of operations available for a service
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ServerBinder.MethodStub`1">
+            <summary>
+            Provides utilities associated with the method being considered
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ServerBinder.MethodStub`1.Method">
+            <summary>
+            The runtime method being considered
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerBinder.MethodStub`1.CreateDelegate``1">
+            <summary>
+            Create a delegate that will invoke this method against a constant instance of the service
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerBinder.TryBind``3(ProtoBuf.Grpc.Configuration.ServerBinder.ServiceBindContext,Grpc.Core.Method{``1,``2},ProtoBuf.Grpc.Configuration.ServerBinder.MethodStub{``0})">
+            <summary>
+            The implementing binder should bind the method to the bind-state
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerBinder.OnWarn(System.String,System.Object[])">
+            <summary>
+            Publish a warning message
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerBinder.OnError(System.String,System.Object[])">
+            <summary>
+            Publish a warning message
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ServerBinder.ServiceBindContext">
+            <summary>
+            Describes the relationship between a service contract and a service definition
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ServerBinder.ServiceBindContext.State">
+            <summary>
+            The caller-provided state for this operation
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ServerBinder.ServiceBindContext.ServiceBinder">
+            <summary>
+            The service binder to use.
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ServerBinder.ServiceBindContext.ContractType">
+            <summary>
+            The service contract interface type
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ServerBinder.ServiceBindContext.ServiceType">
+            <summary>
+            The concrete service type
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerBinder.ServiceBindContext.GetMetadata(System.Reflection.MethodInfo)">
+            <summary>
+            <para>Gets the metadata associated with a specific contract method.</para>
+            <para>Note: Later is higher priority in the code that consumes this.</para>
+            </summary>
+            <returns>Prioritised list of metadata.</returns>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ServiceAttribute">
+            <summary>
+            Explicitly indicates that an interface represents a gRPC service
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ServiceAttribute.Name">
+            <summary>
+            The name of the service
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServiceAttribute.#ctor(System.String)">
+            <summary>
+            Create a new instance of the attribute
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ServiceBinder">
+            <summary>
+            Describes rules for binding to gRPC services
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.ServiceBinder.Default">
+            <summary>
+            Default bindings; services require ServiceContractAttribute; all operations are considered
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServiceBinder.#ctor">
+            <summary>
+            Create a new instance
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServiceBinder.GetDefaultName(System.Type)">
+            <summary>
+            Gets the default name for a potential service-contract
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServiceBinder.GetDataContractName(System.Type)">
+            <summary>
+            Gets the default name for a potential data-contract
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServiceBinder.GetDefaultName(System.Reflection.MethodInfo)">
+            <summary>
+            Gets the default name for a potential operation-contract
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServiceBinder.IsServiceContract(System.Type,System.String@)">
+            <summary>
+            Indicates whether an interface should be considered a service-contract (and if so: by what name)
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServiceBinder.IsOperationContract(System.Reflection.MethodInfo,System.String@)">
+            <summary>
+            Indicates whether a method should be considered an operation-contract (and if so: by what name)
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServiceBinder.GetMetadata(System.Reflection.MethodInfo,System.Type,System.Type)">
+            <summary>
+            <para>Gets the metadata associated with a specific contract method.</para>
+            <para>Note: Later is higher priority in the code that consumes this.</para>
+            </summary>
+            <returns>Prioritised list of metadata.</returns>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServiceBinder.GetMethodImplementation(System.Reflection.MethodInfo,System.Type,System.Type)">
+            <summary>
+            Gets the implementing method from a method definition
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.SimpleRpcExceptionsAttribute">
+            <summary>
+            Indicates that a service or method should use simplified exception handling - which means that all server exceptions are treated as <see cref="T:Grpc.Core.RpcException"/>; this
+            will expose the <see cref="P:System.Exception.Message"/> to the caller (and the type may be interpreted as a <see cref="T:Grpc.Core.StatusCode"/> when possible), which should only be
+            done with caution as this may present security implications. Additional exception metadata (<see cref="P:System.Exception.Data"/>, <see cref="P:System.Exception.InnerException"/>,
+            <see cref="P:System.Exception.StackTrace"/>, etc) is not propagated. The exception is still exposed at the client as an <see cref="T:Grpc.Core.RpcException"/>.
+            </summary>
+            <remarks>This feature is only currently supported on <c>async</c> methods that expose their faults via the returned awaitable, not by throwing directly; a more robust
+            implementation is provided by the <see cref="T:ProtoBuf.Grpc.Configuration.SimpleRpcExceptionsInterceptor"/> interceptor.</remarks>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.SimpleRpcExceptionsAttribute.Default">
+            <summary>
+            Gets a shared instance of this attribute type
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.ServerExceptionsInterceptorBase">
+            <summary>
+            A base interceptor that handles all server-side exceptions.
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerExceptionsInterceptorBase.OnException(System.Exception,Grpc.Core.Status@)">
+            <summary>
+            Allows implementors to intercept exceptions, optionally re-exposing them as <see cref="T:Grpc.Core.RpcException"/>.
+            </summary>
+            <returns><c>true</c> if the exception should be re-exposed as an <see cref="T:Grpc.Core.RpcException"/>, <c>false</c> otherwise</returns>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerExceptionsInterceptorBase.ClientStreamingServerHandler``2(Grpc.Core.IAsyncStreamReader{``0},Grpc.Core.ServerCallContext,Grpc.Core.ClientStreamingServerMethod{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerExceptionsInterceptorBase.ServerStreamingServerHandler``2(``0,Grpc.Core.IServerStreamWriter{``1},Grpc.Core.ServerCallContext,Grpc.Core.ServerStreamingServerMethod{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerExceptionsInterceptorBase.DuplexStreamingServerHandler``2(Grpc.Core.IAsyncStreamReader{``0},Grpc.Core.IServerStreamWriter{``1},Grpc.Core.ServerCallContext,Grpc.Core.DuplexStreamingServerMethod{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.ServerExceptionsInterceptorBase.UnaryServerHandler``2(``0,Grpc.Core.ServerCallContext,Grpc.Core.UnaryServerMethod{``0,``1})">
+            <inheritdoc/>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Configuration.SimpleRpcExceptionsInterceptor">
+            <summary>
+            Indicates that a service or method should use simplified exception handling - which means that all server exceptions are treated as <see cref="T:Grpc.Core.RpcException"/>; this
+            will expose the <see cref="P:System.Exception.Message"/> to the caller (and the type may be interpreted as a <see cref="T:Grpc.Core.StatusCode"/> when possible), which should only be
+            done with caution as this may present security implications. Additional exception metadata (<see cref="P:System.Exception.Data"/>, <see cref="P:System.Exception.InnerException"/>,
+            <see cref="P:System.Exception.StackTrace"/>, etc) is not propagated. The exception is still exposed at the client as an <see cref="T:Grpc.Core.RpcException"/>.
+            </summary>
+        </member>
+        <member name="P:ProtoBuf.Grpc.Configuration.SimpleRpcExceptionsInterceptor.Instance">
+            <summary>
+            Provides a shared instance of this interceptor
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Configuration.SimpleRpcExceptionsInterceptor.OnException(System.Exception,Grpc.Core.Status@)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Internal.Empty">
+            <summary>
+            Represents a void request or result
+            </summary>
+        </member>
+        <member name="F:ProtoBuf.Grpc.Internal.Empty.Instance">
+            <summary>
+            The singleton instance of this type
+            </summary>
+        </member>
+        <member name="F:ProtoBuf.Grpc.Internal.Empty.InstanceTask">
+            <summary>
+            The singleton instance of this type, as a task
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Empty.ToString">
+            <summary>
+            Represents the value as a string
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Empty.Equals(System.Object)">
+            <summary>
+            Compares two instances for equality
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Empty.GetHashCode">
+            <summary>
+            Compares two instances for equality
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.Internal.Reshape">
+            <summary>
+            Provides APIs to shim between the traditional gRPC API and an idiomatic .NET API
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.EmptyValueTask(System.Threading.Tasks.ValueTask)">
+            <summary>
+            Provides a task that is equivalent to a void operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.EmptyTask(System.Threading.Tasks.Task)">
+            <summary>
+            Provides a task that is equivalent to a void operation
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.AsAsyncEnumerable``1(Grpc.Core.IAsyncStreamReader{``0},System.Threading.CancellationToken)">
+            <summary>
+            Interprets a stream-reader as an asynchronous enumerable sequence
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.WriteTo``1(System.Collections.Generic.IAsyncEnumerable{``0},Grpc.Core.IServerStreamWriter{``0},System.Threading.CancellationToken)">
+            <summary>
+            Consumes an asynchronous enumerable sequence and writes it to a server stream-writer
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.WithSimpleExceptionHandling(System.Threading.Tasks.Task)">
+            <summary>
+            Consumes the provided task raising exceptions as <see cref="T:Grpc.Core.RpcException"/>
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.WithSimpleExceptionHandling``1(System.Threading.Tasks.Task{``0})">
+            <summary>
+            Consumes the provided task raising exceptions as <see cref="T:Grpc.Core.RpcException"/>
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.UnarySync``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},``0,System.String)">
+            <summary>
+            Performs a gRPC blocking unary call
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.UnarySyncVoid``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},``0,System.String)">
+            <summary>
+            Performs a gRPC blocking unary call
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.UnaryTaskAsync``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},``0,System.String)">
+            <summary>
+            Performs a gRPC asynchronous unary call
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.UnaryValueTaskAsync``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},``0,System.String)">
+            <summary>
+            Performs a gRPC asynchronous unary call
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.UnaryValueTaskAsyncVoid``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},``0,System.String)">
+            <summary>
+            Performs a gRPC asynchronous unary call
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.ServerStreamingAsync``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},``0,System.String)">
+            <summary>
+            Performs a gRPC server-streaming call
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.ClientStreamingTaskAsync``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},System.Collections.Generic.IAsyncEnumerable{``0},System.String)">
+            <summary>
+            Performs a gRPC client-streaming call
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.ClientStreamingValueTaskAsync``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},System.Collections.Generic.IAsyncEnumerable{``0},System.String)">
+            <summary>
+            Performs a gRPC client-streaming call
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.ClientStreamingValueTaskAsyncVoid``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},System.Collections.Generic.IAsyncEnumerable{``0},System.String)">
+            <summary>
+            Performs a gRPC client-streaming call
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.Internal.Reshape.DuplexAsync``2(ProtoBuf.Grpc.CallContext@,Grpc.Core.CallInvoker,Grpc.Core.Method{``0,``1},System.Collections.Generic.IAsyncEnumerable{``0},System.String)">
+            <summary>
+            Performs a gRPC duplex call
+            </summary>
+        </member>
+        <member name="T:ProtoBuf.Grpc.MetadataExtensions">
+            <summary>
+            Provides auxiliary helper methods to Grpc.Core features
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.MetadataExtensions.GetEntry(Grpc.Core.Metadata,System.String)">
+            <summary>
+            Gets a header Entry by key
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.MetadataExtensions.GetString(Grpc.Core.Metadata,System.String)">
+            <summary>
+            Gets a header's Value by key
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.MetadataExtensions.GetBytes(Grpc.Core.Metadata,System.String)">
+            <summary>
+            Gets a header's ValueBytes by key
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.MetadataExtensions.Add(Grpc.Core.Metadata,System.String,System.Int32)">
+            <summary>
+            Adds a header from an integer value using invariant formatting
+            </summary>
+        </member>
+        <member name="M:ProtoBuf.Grpc.MetadataExtensions.GetInt32(Grpc.Core.Metadata,System.String)">
+            <summary>
+            Reads a header as an integer value using invariant formatting
+            </summary>
+        </member>
+    </members>
+</doc>
