@@ -1,1 +1,1 @@
-# VR-learn-languages
+# learn-languages
